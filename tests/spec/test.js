@@ -110,17 +110,17 @@ describe('toDecimalFormString', function () {
 
     new Array(10).fill().forEach(function (unused, index) {
       arrayNine.forEach(function (ignore, idx) {
-        expect(toDecimalFormString(index)).toBe(index.toString());
+        expect(toDecimalFormString(index)).toBe(String(index));
         var nonZero = idx + 1;
-        expect(toDecimalFormString(-nonZero)).toBe((-nonZero).toString());
+        expect(toDecimalFormString(-nonZero)).toBe(String(-nonZero));
 
         var value = Math.pow(nonZero, nonZero);
-        expect(toDecimalFormString(value)).toBe(value.toString());
-        expect(toDecimalFormString(-value)).toBe((-value).toString());
+        expect(toDecimalFormString(value)).toBe(String(value));
+        expect(toDecimalFormString(-value)).toBe(String(-value));
 
         value = Number('0.' + index + nonZero);
-        expect(toDecimalFormString(value)).toBe(value.toString());
-        expect(toDecimalFormString(-value)).toBe((-value).toString());
+        expect(toDecimalFormString(value)).toBe(String(value));
+        expect(toDecimalFormString(-value)).toBe(String(-value));
 
         value = Number('0.100000000000000' + index + nonZero);
         expect(Number(toDecimalFormString(value))).toBe(value);
@@ -134,8 +134,8 @@ describe('toDecimalFormString', function () {
     expect(toDecimalFormString(-Number.MIN_VALUE)).toBe('-0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005');
     expect(toDecimalFormString(Number.MAX_SAFE_INTEGER)).toBe('9007199254740991');
     expect(toDecimalFormString(Number.MIN_SAFE_INTEGER)).toBe('-9007199254740991');
-    expect(toDecimalFormString(Math.PI)).toBe(Math.PI.toString());
-    expect(toDecimalFormString(-Math.PI)).toBe((-Math.PI).toString());
+    expect(toDecimalFormString(Math.PI)).toBe(String(Math.PI));
+    expect(toDecimalFormString(-Math.PI)).toBe(String(-Math.PI));
   });
 
   it('should convert valid base 10 and scientific E-notation strings', function () {

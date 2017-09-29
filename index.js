@@ -140,7 +140,7 @@ module.exports = function toDecimalFormString(value) {
 
     exponent = exponentIndex - index - 1;
     coefficient = [];
-    coefficient.length = leadingZeroIndex;
+    coefficient.length = leadingZeroIndex + 1;
 
     // Convert string to array of digits without leading/trailing zeros.
     var position = 0;
