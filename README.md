@@ -23,7 +23,7 @@
 ## number-to-decimal-form-string-x
 Convert a base-10 or scientific E-notation value to a decimal form string.
 
-**Version**: 1.0.0  
+**Version**: 1.0.1  
 **Author**: Xotic750 <Xotic750@gmail.com>  
 **License**: [MIT](&lt;https://opensource.org/licenses/MIT&gt;)  
 **Copyright**: Xotic750  
