@@ -53,8 +53,8 @@
     "url": "https://github.com/Xotic750/number-to-decimal-form-string-x/issues"
   },
   "dependencies": {
-    "cached-constructors-x": "^2.0.2",
-    "to-string-x": "^2.0.14"
+    "cached-constructors-x": "^2.0.3",
+    "to-string-x": "^2.0.15"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.0",
