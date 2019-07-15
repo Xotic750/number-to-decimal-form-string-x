@@ -1,17 +1,19 @@
 import toStr from 'to-string-x';
-
-const castNumber = (0).constructor;
-const emptyString = '';
-const {charAt, slice, search, replace, indexOf} = emptyString;
-const {join} = [];
-const decimalMark = '.';
-const hyphenMinus = '-';
-const zeroSymbol = '0';
-const minusZeroSymbol = '-0';
-const isValid = /^-?(?:(?:\d|[1-9]\d*)(?:\.\d+)?)(?:e[+-]?\d+)?$/i;
-const {test} = isValid;
-const errorMsg = 'not a valid base 10 numeric value';
-
+var castNumber = 0 .constructor;
+var emptyString = '';
+var charAt = emptyString.charAt,
+    slice = emptyString.slice,
+    search = emptyString.search,
+    replace = emptyString.replace,
+    indexOf = emptyString.indexOf;
+var join = [].join;
+var decimalMark = '.';
+var hyphenMinus = '-';
+var zeroSymbol = '0';
+var minusZeroSymbol = '-0';
+var isValid = /^-?(?:(?:\d|[1-9]\d*)(?:\.\d+)?)(?:e[+-]?\d+)?$/i;
+var test = isValid.test;
+var errorMsg = 'not a valid base 10 numeric value';
 /**
  * This method converts a base-10 or scientific E-notation value to
  * a decimal form string. Javascript's IEE 754 double-precision numbers
@@ -22,10 +24,10 @@ const errorMsg = 'not a valid base 10 numeric value';
  * @throws {TypeError} If value is a Symbol or not coercible.
  * @returns {string} The value converted to a decimal form string.
  */
-export default function toDecimalFormString(value) {
-  let workingValue = value;
 
-  // Minus zero?
+export default function toDecimalFormString(value) {
+  var workingValue = value; // Minus zero?
+
   if (workingValue === 0 && 1 / workingValue < 0) {
     workingValue = minusZeroSymbol;
   } else {
@@ -34,28 +36,28 @@ export default function toDecimalFormString(value) {
     if (test.call(isValid, workingValue) === false) {
       throw new TypeError(errorMsg);
     }
-  }
+  } // Determine sign.
 
-  // Determine sign.
-  let sign;
+
+  var sign;
 
   if (charAt.call(workingValue, 0) === hyphenMinus) {
     workingValue = slice.call(workingValue, 1);
     sign = -1;
   } else {
     sign = 1;
-  }
+  } // Decimal point?
 
-  // Decimal point?
-  const pointIndex = indexOf.call(workingValue, decimalMark);
+
+  var pointIndex = indexOf.call(workingValue, decimalMark);
 
   if (pointIndex > -1) {
     workingValue = replace.call(workingValue, decimalMark, emptyString);
   }
 
-  let exponentIndex = pointIndex;
-  // Exponential form?
-  let index = search.call(workingValue, /e/i);
+  var exponentIndex = pointIndex; // Exponential form?
+
+  var index = search.call(workingValue, /e/i);
 
   if (index > 0) {
     // Determine exponent.
@@ -70,15 +72,16 @@ export default function toDecimalFormString(value) {
     exponentIndex = workingValue.length;
   }
 
-  let leadingZeroIndex = workingValue.length;
-  // Determine leading zeros.
+  var leadingZeroIndex = workingValue.length; // Determine leading zeros.
+
   index = 0;
+
   while (index < leadingZeroIndex && charAt.call(workingValue, index) === zeroSymbol) {
     index += 1;
   }
 
-  let coefficient;
-  let exponent;
+  var coefficient;
+  var exponent;
 
   if (index === leadingZeroIndex) {
     // Zero.
@@ -94,10 +97,10 @@ export default function toDecimalFormString(value) {
 
     exponent = exponentIndex - index - 1;
     coefficient = [];
-    coefficient.length = leadingZeroIndex + 1;
+    coefficient.length = leadingZeroIndex + 1; // Convert string to array of digits without leading/trailing zeros.
 
-    // Convert string to array of digits without leading/trailing zeros.
-    let position = 0;
+    var position = 0;
+
     while (index <= leadingZeroIndex) {
       coefficient[position] = castNumber(charAt.call(workingValue, index));
       position += 1;
@@ -105,11 +108,12 @@ export default function toDecimalFormString(value) {
     }
   }
 
-  let decimalForm = join.call(coefficient, emptyString);
-  const decimalFormLength = decimalForm.length;
+  var decimalForm = join.call(coefficient, emptyString);
+  var decimalFormLength = decimalForm.length;
 
   if (exponent < 0) {
     exponent += 1;
+
     while (exponent) {
       decimalForm = zeroSymbol + decimalForm;
       exponent += 1;
@@ -121,18 +125,20 @@ export default function toDecimalFormString(value) {
 
     if (exponent > decimalFormLength) {
       exponent -= decimalFormLength;
+
       while (exponent) {
         decimalForm += zeroSymbol;
         exponent -= 1;
       }
     } else if (exponent < decimalFormLength) {
       decimalForm = slice.call(decimalForm, 0, exponent) + decimalMark + slice.call(decimalForm, exponent);
-    }
+    } // Exponent is zero.
 
-    // Exponent is zero.
   } else if (decimalFormLength > 1) {
     decimalForm = charAt.call(decimalForm, 0) + decimalMark + slice.call(decimalForm, 1);
   }
 
   return sign < 0 ? hyphenMinus + decimalForm : decimalForm;
 }
+
+//# sourceMappingURL=number-to-decimal-form-string-x.esm.js.map

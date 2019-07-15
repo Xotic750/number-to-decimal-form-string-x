@@ -1,51 +1,34 @@
-let toDecimalFormString;
+import noop from 'lodash/noop';
+import toDecimalFormString from '../src/number-to-decimal-form-string-x';
 
-if (typeof module === 'object' && module.exports) {
-  require('es5-shim');
-  require('es5-shim/es5-sham');
-
-  if (typeof JSON === 'undefined') {
-    JSON = {};
-  }
-
-  require('json3').runInContext(null, JSON);
-  require('es6-shim');
-  const es7 = require('es7-shim');
-  Object.keys(es7).forEach(function(key) {
-    const obj = es7[key];
-
-    if (typeof obj.shim === 'function') {
-      obj.shim();
-    }
-  });
-  toDecimalFormString = require('../../index.js');
-} else {
-  toDecimalFormString = returnExports;
-}
-
+/* eslint-disable-next-line compat/compat */
 const hasSymbol = typeof Symbol === 'function' && typeof Symbol('') === 'symbol';
 const ifSymbolIt = hasSymbol ? it : xit;
 
 describe('toDecimalFormString', function() {
   it('is a function', function() {
+    expect.assertions(1);
     expect(typeof toDecimalFormString).toBe('function');
   });
 
   it('should throw when target is null or undefined', function() {
+    expect.assertions(3);
     expect(function() {
       toDecimalFormString();
-    }).toThrow();
+    }).toThrowErrorMatchingSnapshot();
 
     expect(function() {
+      /* eslint-disable-next-line no-void */
       toDecimalFormString(void 0);
-    }).toThrow();
+    }).toThrowErrorMatchingSnapshot();
 
     expect(function() {
       toDecimalFormString(null);
-    }).toThrow();
+    }).toThrowErrorMatchingSnapshot();
   });
 
   it('should throw when target is not a valid base 10 or scientific E-notation value', function() {
+    expect.assertions(51);
     const invalids = [
       NaN,
       'NaN',
@@ -57,7 +40,7 @@ describe('toDecimalFormString', function() {
       '\t',
       new Date(),
       new RegExp(),
-      function() {},
+      noop,
       ' 0.1',
       '7.5 ',
       ' 0 ',
@@ -103,11 +86,12 @@ describe('toDecimalFormString', function() {
     invalids.forEach(function(invalid) {
       expect(function() {
         toDecimalFormString(invalid);
-      }).toThrow();
+      }).toThrowErrorMatchingSnapshot();
     });
   });
 
   it('should convert IEE 754 double-precision numbers to same value', function() {
+    expect.assertions(728);
     const arrayNine = new Array(9).fill();
 
     new Array(10).fill().forEach(function(unused, index) {
@@ -116,7 +100,7 @@ describe('toDecimalFormString', function() {
         const nonZero = idx + 1;
         expect(toDecimalFormString(-nonZero)).toBe(String(-nonZero));
 
-        let value = Math.pow(nonZero, nonZero);
+        let value = nonZero ** nonZero;
         expect(toDecimalFormString(value)).toBe(String(value));
         expect(toDecimalFormString(-value)).toBe(String(-value));
 
@@ -142,13 +126,16 @@ describe('toDecimalFormString', function() {
     expect(toDecimalFormString(-Number.MIN_VALUE)).toBe(
       '-0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005',
     );
+    /* eslint-disable-next-line compat/compat */
     expect(toDecimalFormString(Number.MAX_SAFE_INTEGER)).toBe('9007199254740991');
+    /* eslint-disable-next-line compat/compat */
     expect(toDecimalFormString(Number.MIN_SAFE_INTEGER)).toBe('-9007199254740991');
     expect(toDecimalFormString(Math.PI)).toBe(String(Math.PI));
     expect(toDecimalFormString(-Math.PI)).toBe(String(-Math.PI));
   });
 
   it('should convert valid base 10 and scientific E-notation strings', function() {
+    expect.assertions(928);
     expect(toDecimalFormString('1111111111111111111')).toBe('1111111111111111111');
     expect(toDecimalFormString('11111111111111111111')).toBe('11111111111111111111');
     expect(toDecimalFormString('111111111111111111111')).toBe('111111111111111111111');
@@ -1681,20 +1668,23 @@ describe('toDecimalFormString', function() {
   });
 
   it('should throw if target is not coercible', function() {
+    expect.assertions(1);
     expect(function() {
       toDecimalFormString(Object.create(null));
-    }).toThrow();
+    }).toThrowErrorMatchingSnapshot();
   });
 
   ifSymbolIt('should throw for Symbol', function() {
+    expect.assertions(2);
+    /* eslint-disable-next-line compat/compat */
     const sym = Symbol('foo');
     expect(function() {
       toDecimalFormString(sym);
-    }).toThrow();
+    }).toThrowErrorMatchingSnapshot();
 
     const symObj = Object(sym);
     expect(function() {
       toDecimalFormString(Object(symObj));
-    }).toThrow();
+    }).toThrowErrorMatchingSnapshot();
   });
 });
