@@ -1,7 +1,6 @@
 import noop from 'lodash/noop';
 import toDecimalFormString from '../src/number-to-decimal-form-string-x';
 
-/* eslint-disable-next-line compat/compat */
 const hasSymbol = typeof Symbol === 'function' && typeof Symbol('') === 'symbol';
 const ifSymbolIt = hasSymbol ? it : xit;
 
@@ -18,7 +17,6 @@ describe('toDecimalFormString', function() {
     }).toThrowErrorMatchingSnapshot();
 
     expect(function() {
-      /* eslint-disable-next-line no-void */
       toDecimalFormString(void 0);
     }).toThrowErrorMatchingSnapshot();
 
@@ -126,9 +124,9 @@ describe('toDecimalFormString', function() {
     expect(toDecimalFormString(-Number.MIN_VALUE)).toBe(
       '-0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005',
     );
-    /* eslint-disable-next-line compat/compat */
+
     expect(toDecimalFormString(Number.MAX_SAFE_INTEGER)).toBe('9007199254740991');
-    /* eslint-disable-next-line compat/compat */
+
     expect(toDecimalFormString(Number.MIN_SAFE_INTEGER)).toBe('-9007199254740991');
     expect(toDecimalFormString(Math.PI)).toBe(String(Math.PI));
     expect(toDecimalFormString(-Math.PI)).toBe(String(-Math.PI));
@@ -1676,7 +1674,7 @@ describe('toDecimalFormString', function() {
 
   ifSymbolIt('should throw for Symbol', function() {
     expect.assertions(2);
-    /* eslint-disable-next-line compat/compat */
+
     const sym = Symbol('foo');
     expect(function() {
       toDecimalFormString(sym);
