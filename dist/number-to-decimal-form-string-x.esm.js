@@ -25,7 +25,7 @@ var errorMsg = 'not a valid base 10 numeric value';
  * @returns {string} The value converted to a decimal form string.
  */
 
-export default function toDecimalFormString(value) {
+var toDecimalFormString = function toDecimalFormString(value) {
   var workingValue = value; // Minus zero?
 
   if (workingValue === 0 && 1 / workingValue < 0) {
@@ -139,6 +139,8 @@ export default function toDecimalFormString(value) {
   }
 
   return sign < 0 ? hyphenMinus + decimalForm : decimalForm;
-}
+};
+
+export default toDecimalFormString;
 
 //# sourceMappingURL=number-to-decimal-form-string-x.esm.js.map

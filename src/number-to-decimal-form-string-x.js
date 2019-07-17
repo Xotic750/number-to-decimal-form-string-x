@@ -22,7 +22,7 @@ const errorMsg = 'not a valid base 10 numeric value';
  * @throws {TypeError} If value is a Symbol or not coercible.
  * @returns {string} The value converted to a decimal form string.
  */
-export default function toDecimalFormString(value) {
+const toDecimalFormString = function toDecimalFormString(value) {
   let workingValue = value;
 
   // Minus zero?
@@ -135,4 +135,6 @@ export default function toDecimalFormString(value) {
   }
 
   return sign < 0 ? hyphenMinus + decimalForm : decimalForm;
-}
+};
+
+export default toDecimalFormString;

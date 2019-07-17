@@ -2,13 +2,13 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2017-present",
-  "date": "2019-07-16T21:25:10.421Z",
+  "date": "2019-07-17T17:02:08.745Z",
   "describe": "",
   "description": "Convert a base-10 or scientific E-notation value to a decimal form string.",
   "file": "number-to-decimal-form-string-x.js",
-  "hash": "b49a8a1648a6bded6906",
+  "hash": "fdc42172392c8a8ca64e",
   "license": "MIT",
-  "version": "2.0.3"
+  "version": "2.0.4"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -284,17 +284,18 @@ var castString = ERROR_MESSAGE.constructor;
  * @returns {string} The converted value.
  */
 
-function ToString(value) {
+var to_string_x_esm_ToString = function ToString(value) {
   if (is_symbol_default()(value)) {
     throw new TypeError(ERROR_MESSAGE);
   }
 
   return castString(value);
-}
+};
+
+/* harmony default export */ var to_string_x_esm = (to_string_x_esm_ToString);
 
 
 // CONCATENATED MODULE: ./dist/number-to-decimal-form-string-x.esm.js
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return toDecimalFormString; });
 
 var castNumber = 0 .constructor;
 var emptyString = '';
@@ -322,13 +323,13 @@ var errorMsg = 'not a valid base 10 numeric value';
  * @returns {string} The value converted to a decimal form string.
  */
 
-function toDecimalFormString(value) {
+var number_to_decimal_form_string_x_esm_toDecimalFormString = function toDecimalFormString(value) {
   var workingValue = value; // Minus zero?
 
   if (workingValue === 0 && 1 / workingValue < 0) {
     workingValue = minusZeroSymbol;
   } else {
-    workingValue = ToString(workingValue);
+    workingValue = to_string_x_esm(workingValue);
 
     if (test.call(isValid, workingValue) === false) {
       throw new TypeError(errorMsg);
@@ -436,7 +437,9 @@ function toDecimalFormString(value) {
   }
 
   return sign < 0 ? hyphenMinus + decimalForm : decimalForm;
-}
+};
+
+/* harmony default export */ var number_to_decimal_form_string_x_esm = __webpack_exports__["default"] = (number_to_decimal_form_string_x_esm_toDecimalFormString);
 
 
 
