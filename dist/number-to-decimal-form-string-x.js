@@ -2,13 +2,13 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2017-present",
-  "date": "2019-07-26T14:13:06.025Z",
+  "date": "2019-07-27T01:04:48.566Z",
   "describe": "",
   "description": "Convert a base-10 or scientific E-notation value to a decimal form string.",
   "file": "number-to-decimal-form-string-x.js",
   "hash": "fdc42172392c8a8ca64e",
   "license": "MIT",
-  "version": "2.0.15"
+  "version": "2.0.16"
 }
 */
 (function webpackUniversalModuleDefinition(root, factory) {
