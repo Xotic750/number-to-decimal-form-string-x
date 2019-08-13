@@ -2,11 +2,11 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2017-present",
-  "date": "2019-08-12T22:09:00.188Z",
+  "date": "2019-08-13T05:46:42.443Z",
   "describe": "",
   "description": "Convert a base-10 or scientific E-notation value to a decimal form string.",
   "file": "number-to-decimal-form-string-x.js",
-  "hash": "fdc42172392c8a8ca64e",
+  "hash": "6fd633e440cd6d4fc3e0",
   "license": "MIT",
   "version": "2.0.18"
 }
@@ -23,19 +23,34 @@
 })((function () {
   'use strict';
 
-  if (typeof self !== 'undefined') {
-    return self;
-  }
+  /* eslint-disable-next-line no-var */
+  var magic;
 
-  if (typeof window !== 'undefined') {
+  try {
+    /* eslint-disable-next-line no-extend-native */
+    Object.defineProperty(Object.prototype, '__magic__', {
+      /* eslint-disable-next-line object-shorthand */
+      get: function() {
+        return this;
+      },
+      /* eslint-disable-next-line prettier/prettier */
+      configurable: true
+    });
+
+    if (typeof __magic__ === 'undefined') {
+      magic = typeof self === 'undefined' ? window : self;
+    } else {
+      /* eslint-disable-next-line no-undef */
+      magic = __magic__;
+    }
+
+    /* eslint-disable-next-line no-underscore-dangle,no-use-extend-native/no-use-extend-native */
+    delete Object.prototype.__magic__;
+
+    return magic;
+  } catch (error) {
     return window;
   }
-
-  if (typeof global !== 'undefined') {
-    return global;
-  }
-
-  return Function('return this')();
 }()), function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
