@@ -2,11 +2,11 @@
 {
   "author": "Graham Fairweather",
   "copywrite": "Copyright (c) 2017-present",
-  "date": "2019-08-13T05:46:42.443Z",
+  "date": "2019-08-13T11:25:33.729Z",
   "describe": "",
   "description": "Convert a base-10 or scientific E-notation value to a decimal form string.",
   "file": "number-to-decimal-form-string-x.js",
-  "hash": "6fd633e440cd6d4fc3e0",
+  "hash": "93da82c2678da8ef527e",
   "license": "MIT",
   "version": "2.0.18"
 }
@@ -23,33 +23,47 @@
 })((function () {
   'use strict';
 
-  /* eslint-disable-next-line no-var */
-  var magic;
-
-  try {
-    /* eslint-disable-next-line no-extend-native */
-    Object.defineProperty(Object.prototype, '__magic__', {
-      /* eslint-disable-next-line object-shorthand */
-      get: function() {
-        return this;
-      },
-      /* eslint-disable-next-line prettier/prettier */
-      configurable: true
-    });
-
-    if (typeof __magic__ === 'undefined') {
-      magic = typeof self === 'undefined' ? window : self;
-    } else {
-      /* eslint-disable-next-line no-undef */
-      magic = __magic__;
+  var ObjectCtr = {}.constructor;
+  var objectPrototype = ObjectCtr.prototype;
+  var defineProperty = ObjectCtr.defineProperty;
+  var $globalThis;
+  var getGlobalFallback = function() {
+    if (typeof self !== 'undefined') {
+      return self;
     }
 
-    /* eslint-disable-next-line no-underscore-dangle,no-use-extend-native/no-use-extend-native */
-    delete Object.prototype.__magic__;
+    if (typeof window !== 'undefined') {
+      return window;
+    }
 
-    return magic;
+    if (typeof global !== 'undefined') {
+      return global;
+    }
+
+    return void 0;
+  };
+
+  var returnThis = function() {
+    return this;
+  };
+
+  try {
+    if (defineProperty) {
+      defineProperty(objectPrototype, '$$globalThis$$', {
+        get: returnThis,
+        configurable: true
+      });
+    } else {
+      objectPrototype.__defineGetter__('$$globalThis$$', returnThis);
+    }
+
+    $globalThis = typeof $$globalThis$$ === 'undefined' ? getGlobalFallback() : $$globalThis$$;
+
+    delete objectPrototype.$$globalThis$$;
+
+    return $globalThis;
   } catch (error) {
-    return window;
+    return getGlobalFallback();
   }
 }()), function() {
 return /******/ (function(modules) { // webpackBootstrap
