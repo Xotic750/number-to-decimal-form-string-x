@@ -55,6 +55,7 @@
     "url": "https://github.com/Xotic750/number-to-decimal-form-string-x/issues"
   },
   "dependencies": {
+    "simple-methodize-x": "^1.0.2",
     "to-string-x": "^2.1.0"
   },
   "devDependencies": {
